@@ -6,43 +6,60 @@ height = float(input("\nPlease enter your height (in meters, i.e. 1.80): "))
 weight = float(input("\nPlease end your weight (in kg, i.e. 70.5kg): "))
 
 print("\n\n========")
-print("Your Height is:", height, "Meters \nYour Weight is:", weight,"KG")
+print("Your Height is:", height, "Meters \nYour Weight is:", weight, "KG")
 print("========")
 
 # calculate BMI and round to 1 digit
 # future improvement use maths module for powers?
-bmi = round(weight/(height**2),1)
+bmi = round(weight/(height**2), 1)
 
-print("\n========\n========\n")
-print("Your Current BMI is: " ,bmi, "\n")
+print("Your Current BMI is: ", bmi, "Which puts you within the:")
 
-if (bmi >= 30):
-    print("Obese range")
-elif (bmi >=25):
-    print("Overweight Weight range")
-elif (bmi >=18.5):
-    print("Normal/Healthy Weight range")
+# calculate values for underweight upper limit
+under_high = round(18.4*(height**2), 1)
+# calculate values for normal/healthy upper/lower
+normal_low = round(18.5*(height**2), 1)
+normal_high = round(24.9*(height**2), 1)
+# calculate values for overweight upper/lower
+over_low = round(25.0*(height**2), 1)
+over_high = round(29.9*(height**2), 1)
+# calculate values for obese lower limit
+obese_low = round(30*(height**2), 1)
+
+if bmi >= 30:
+    print("**** Obese range ****")
+    obese_loss = round((weight-obese_low), 1)
+    print("You need to lose" , obese_loss, "KG to drop into the overweight category")
+    obese_big_loss = round((weight-normal_high), 1)
+    print("You need to lose" , obese_big_loss, "KG to drop into the Healthy category")
+elif bmi >= 25:
+    print("**** Overweight range ****")
+    over_loss = round((weight-over_low), 1)
+    print("You need to lose" , over_loss, "KG to get into the Healthy category")
+elif bmi >= 18.5:
+    print("**** Healthy Weight range ****")
 else:
-    print("Underweight Range")
-print("\n========\n========\n")
+    print("**** Underweight Range **** ")
+    under_gain = round((under_high-weight), 1)
+    print("You need to gain" , under_gain, "KG to get into the Healthy category")
+print("\n========\n")
 
-### Next task, for a given height, calc a users weights for given BMI values.
-# other tasks
-# use functions
+# Display as a table
+
+print("The table below displays upper and lower weight thresholds (in KG) for each category: \n")
+
 print("--------------------------------")
 print("|    Group    | Lower | Higher |")
 print("--------------------------------")
-print("| Underweight | value | value  |")
+print("| Underweight |  n/a  | ", under_high, " |")
 print("--------------------------------")
-print("|   Normal    | value | value  |")
+print("|   Healthy   | ", normal_low, "| ", normal_high, " |")
 print("--------------------------------")
-print("| Overweight  | value | value  |")
+print("| Overweight  | ", over_low, "| ", over_high, " |")
 print("--------------------------------")
-print("|    Obese    | value | value  |")
+print("|    Obese    | ", obese_low, " |  n/a  |")
 print("--------------------------------")
-'''
-    If your BMI is less than 18.5, it falls within the underweight range.
-    If your BMI is 18.5 to 24.9, it falls within the normal or Healthy Weight range.
-    If your BMI is 25.0 to 29.9, it falls within the overweight range.
-    If your BMI is 30.0 or higher, it falls within the obese range.
-'''
+
+
+# other tasks
+# use functions
