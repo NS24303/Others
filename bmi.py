@@ -45,6 +45,11 @@ else:
 print("\n========\n")
 
 # Display as a table
+#21.7 is middle of healthy range
+
+middle = round(21.7*(height**2), 1)
+print("to be in the middle of the healthy range (21.7) you weight needs to be" , middle , "KG\n")
+
 
 print("The table below displays upper and lower weight thresholds (in KG) for each category: \n")
 
